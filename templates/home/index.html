@@ -110,7 +110,7 @@
                 <a class="text-decoration-none" href="">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="{% static 'img/category/' %}/{{ object.image_path }}" alt="">
+                            <img class="img-fluid" src="{% static 'img/category/' %}{{ object.image_path }}" alt="">
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>{{ object.cate_name }}</h6>
