@@ -1,0 +1,10 @@
+<html>
+<body>
+  <h2>Payment</h2>
+  <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+    {% csrf_token %}
+    {{ form.render }}
+    <input type="submit" value="Pay with PayPal">
+  </form>
+</body>
+</html>

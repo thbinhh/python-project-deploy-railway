@@ -1,0 +1,94 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load custom_filter %}
+{% block placeholder %}
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <span class="breadcrumb-item active">Contact</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Shop</span></h2>
+        <div class="row px-xl-5">
+            <div class="col-lg-3 mb-5">
+                <div class="product-img position-relative overflow-hidden mb-4" style="border-radius: 50%;">
+                    <img class="img-fluid w-100" src="{% static 'img/user_image' %}/{{ shop.shop_image_path }}" alt="" style="border-radius: 50%;">
+                </div>
+                <div class="bg-light p-30 mb-3">
+                    <h3>{{shop.shop_name}}</h3>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{ shop.shop_address }}</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>{{ shop.shop_email }}</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>{{ shop.shop_phone }}</p>
+                </div>
+            </div>
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+                    <form action="add-product-send" method="post" novalidate="novalidate">
+                        {% csrf_token %}
+                        <h5> Loại mặt hàng </h5>
+                        <div class="control-group">
+                            <select class="form-control" name="cate" required="required" data-validation-required-message="Nhập loại sản phẩm">
+                                {% for category in categories %}
+                                    <option value="{{ category.cate_id }}">{{ category.cate_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <h5> Tên mặt hàng </h5>
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="name" placeholder="Tên mặt hàng"
+                                required="required" data-validation-required-message="Nhập tên mặt hàng" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <h5> Giá mặt hàng </h5>
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="price" placeholder="Giá mặt hàng"
+                                required="required" data-validation-required-message="Nhập giá mặt hàng" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        <h5> Số lượng mặt hàng </h5>
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="quantity" placeholder="Số lượng mặt hàng"
+                                required="required" data-validation-required-message="Nhập số lượng mặt hàng" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        <h5> Thông tin mặt hàng </h5>
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="information" placeholder="Thông tin mặt hàng"
+                                required="required" data-validation-required-message="Nhập thông tin mặt hàng" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        <h5> Mô tả </h5>
+                        <div class="control-group">
+                            <textarea class="form-control" rows="8" name="description" placeholder="Mô tả mặt hàng"
+                                required="required"
+                                data-validation-required-message="Nhập thông tin mô tả mặt hàng"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        <h5> Hinh </h5>
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+{% endblock %}

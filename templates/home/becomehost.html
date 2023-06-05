@@ -1,0 +1,108 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load custom_filter %}
+{% block placeholder %}
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <span class="breadcrumb-item active">Become Host</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Become Host</span></h2>
+        <div class="row px-xl-5">
+            <div class="col-lg-3 mb-5">
+                <div class="product-img position-relative overflow-hidden mb-4" style="border-radius: 50%;">
+                    <img class="img-fluid w-100" src="{% static 'img/user_image' %}/{{ user_profile.user_image_path }}" alt="" style="border-radius: 50%;">
+                </div>
+                <div class="bg-light p-30 mb-3">
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{ user_profile.address }}</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>{{ user.email }}</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>{{ user_profile.phone }}</p>
+                </div>
+            </div>
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+                    <form action="create-shop" method="post" novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            <label>Tên shop</label>
+                            <input type="text" class="form-control" name="name" placeholder="Your Shop Name"
+                                required="required" data-validation-required-message="Please enter your shop name" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="Your Shop Email"
+                                required="required" data-validation-required-message="Please enter your shop email" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Địa chỉ</label>
+                            <input type="text" class="form-control" name="address" placeholder="Your Shop Address"
+                                required="required" data-validation-required-message="Please enter your shop address" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" class="form-control" name="phone" placeholder="Your Shop Phone"
+                                required="required" data-validation-required-message="Please enter your shop phone" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Địa chỉ Paypal</label>
+                            <input type="text" class="form-control" name="palpayaddress" placeholder="Your Shop Paypal Address"
+                                required="required" data-validation-required-message="Please enter your shop paypal address" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Tỉnh/Thành phố</label>
+                            <select class="form-control" name="status" required="required">
+                                <option>Thành phố Hồ Chí Minh</option>
+                            </select>
+                            <input type="hidden" class="form-control" type="text" placeholder="New York" name="tinh">
+                        </div>
+                        <div class="control-group">
+                            <label>Quận/Huyện</label>
+                            <select class="form-control" name="status" required="required">
+                                <option>Quận Thủ Đức</option>
+                            </select>
+                            <input type="hidden" class="form-control" type="text" placeholder="New York" name="huyen">
+                        </div>
+                        <div class="control-group">
+                            <label>Loại sản phẩm</label>
+                            <select class="form-control" name="status" required="required">
+                                <option>Quần áo nam</option>
+                            </select>
+                            <input type="hidden" class="form-control" name="type" placeholder="Type of product"
+                                required="required" data-validation-required-message="Please type of product" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control" rows="8" name="description" placeholder="Description for your shop"
+                                required="required"
+                                data-validation-required-message="Please description for your shop"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+{% endblock %}

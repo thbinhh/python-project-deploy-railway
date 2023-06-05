@@ -1,0 +1,59 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load custom_filter %}
+{% block placeholder %}
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href="#">User  </a>
+                    <span class="breadcrumb-item active">Favorite</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Shop Start -->
+    <div class="container-fluid pt-5 pb-3">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sản phẩm yêu thích</span></h2>
+        <div class="row px-xl-5">
+            {% if products %}
+                {% for product in products|slice:":8" %}
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="{% static 'img/product' %}/{{ product.image_path}}" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h5 text-decoration-none text-truncate" href="/product/{{ product.product_id }}">{{ product.product_name }}</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>{{ product.product_price_new|format_price }}</h5>
+                                <h6 class="text-muted ml-2"><del>{{ product.product_price|format_price }}</del></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <a style="display: inline; color: black;" class="mr-1">({{product.type}})</a>
+                                <a style="display: inline;">({{ product.calculate_average_rating|round_rating }}) </a><small style="color: #ffe000;" class="fas fa-star"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-lg-5 ml-4">
+                    <h5>{{ message }}</h5>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Shop End -->
+{% endblock %}
